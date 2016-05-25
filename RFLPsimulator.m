@@ -5,17 +5,21 @@ enzymes = {'RsaI';
              'MvaI'};
          %W = A or T
          %N = A, T, C or G
+         
+HCVGenomeDataPath = 'C:/Users/BatoolAbbas/Dropbox/Hep-C/HCVGenomeData/';
+FastaFileNames = {'HCV1a.fasta';
+                  'HCV2a.fasta';
+                  'HCV3.fasta';
+                  'HCV4a.fasta';
+                  'HCV5a.fasta';
+                  'HCV6.fasta'};
         
- HCVGenomeDataPath = 'C:/Users/BatoolAbbas/Dropbox/Hep-C/HCVGenomeData/';
  HCV = [];
-HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,'HCV1a.fasta'))];
-HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,'HCV2a.fasta'))];
-HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,'HCV3.fasta'))];
-HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,'HCV4a.fasta'))];
-HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,'HCV5a.fasta'))];
-HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,'HCV6.fasta'))];
+ for i=1:size(FastaFileNames,1)
+     HCV = [HCV;fastaread(strcat(HCVGenomeDataPath,char(FastaFileNames{i})))];
+ end
 
-Digest = [1;2;];
+Digests = [1;2;];
 GenotypeMixes = {[1,4];
                 [1,4,5];
                 2;
@@ -23,10 +27,10 @@ GenotypeMixes = {[1,4];
                 6};
 
 for i=1:size(GenotypeMixes,1)
-    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestA_'),HCV,Digest,GenotypeMixes{i},enzymes);
+    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestA_'),HCV,Digests,GenotypeMixes{i},enzymes);
 end
 
-DigestB = [4;3;];
+Digests = [4;3;];
 GenotypeMixes = {[1,5];
                 1;
                 2;
@@ -34,15 +38,15 @@ GenotypeMixes = {[1,5];
                 4;
                 6};
 for i=1:size(GenotypeMixes,1)            
-    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestB_'),HCV,Digest,GenotypeMixes{i},enzymes);
+    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestB_'),HCV,Digests,GenotypeMixes{i},enzymes);
 end
 
-DigestC = [4;5;];
+Digests = [4;5;];
 GenotypeMixes = {1;
                 2;
                 [3,4];
                 5;
                 6};
 for i=1:size(GenotypeMixes,1)
-    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestC_'),HCV,Digest,GenotypeMixes{i},enzymes);
+    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestC_'),HCV,Digests,GenotypeMixes{i},enzymes);
 end
