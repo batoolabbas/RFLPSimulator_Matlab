@@ -5,4 +5,5 @@ function [Fragments,Sequences] = restrictionMapping(Sequence,Digest,enzymes)
         [~,cutSites,~] = restrict(Sequence,char(enzymes{Digest(jj)}));
         Fragments = union(Fragments,cutSites');
     end
+    Fragments = [Fragments;size(Sequence,2)];
 end

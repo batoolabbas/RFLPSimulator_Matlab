@@ -1,4 +1,4 @@
-function [] = restrictAndSave(filename,HCV,Digest,GenotypeMix,enzymes)
+function [Fragments,Sequences] = restrictAndSave(filename,HCV,Digest,GenotypeMix,enzymes)
 Sequences = {};
 Fragments ={};
 for j=1:size(GenotypeMix,2)
@@ -7,14 +7,10 @@ for j=1:size(GenotypeMix,2)
 end
 fileID = fopen(strcat(filename,int2str(GenotypeMix),'.txt'),'w');
 for ii=1:size(Sequences,1)
-    for iii=1:size(Fragments{ii},1)
+    for iii=1:size(Fragments{ii},1)-1
         startID = Fragments{ii}(iii)+1;
-        if(iii==size(Fragments{ii},1))
-            fprintf(fileID,'%s\n',char(Sequences{ii}(startID:end)));
-        else
-            endID = Fragments{ii}(iii+1);
-            fprintf(fileID,'%s\n',char(Sequences{ii}(startID:endID)));
-        end
+        endID = Fragments{ii}(iii+1);
+        fprintf(fileID,'%s\n',char(Sequences{ii}(startID:endID)));
     end
 end
 fclose(fileID);

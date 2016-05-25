@@ -27,7 +27,10 @@ GenotypeMixes = {[1,4];
                 6};
 
 for i=1:size(GenotypeMixes,1)
-    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestA_'),HCV,Digests,GenotypeMixes{i},enzymes);
+    [Fragments,Sequences] = restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestA_'),HCV,Digests,GenotypeMixes{i},enzymes);
+    plotRFLP(Fragments,Sequences,1,strcat('DigestA_',int2str(GenotypeMixes{i})));
+    print(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestA ',int2str(GenotypeMixes{i})),'-djpeg');
+    close all;
 end
 
 Digests = [4;3;];
@@ -38,7 +41,10 @@ GenotypeMixes = {[1,5];
                 4;
                 6};
 for i=1:size(GenotypeMixes,1)            
-    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestB_'),HCV,Digests,GenotypeMixes{i},enzymes);
+    [Fragments,Sequences] = restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestB_'),HCV,Digests,GenotypeMixes{i},enzymes);
+    plotRFLP(Fragments,Sequences,1,strcat('DigestB_',int2str(GenotypeMixes{i})));
+    print(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestB ',int2str(GenotypeMixes{i})),'-djpeg');
+    close all;
 end
 
 Digests = [4;5;];
@@ -47,6 +53,9 @@ GenotypeMixes = {1;
                 [3,4];
                 5;
                 6};
-for i=1:size(GenotypeMixes,1)
-    restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestC_'),HCV,Digests,GenotypeMixes{i},enzymes);
+for i=1:size(GenotypeMixes,1)            
+    [Fragments,Sequences] = restrictAndSave(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestC_'),HCV,Digests,GenotypeMixes{i},enzymes);
+    plotRFLP(Fragments,Sequences,1,strcat('DigestC_',int2str(GenotypeMixes{i})));
+    print(strcat(HCVGenomeDataPath,'RestrictionMappingResults/DigestC ',int2str(GenotypeMixes{i})),'-djpeg');
+    close all;
 end
